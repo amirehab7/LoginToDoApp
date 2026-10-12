@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 320px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input, button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px;
+            margin-top: 12px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Account</h2>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" action="/register">
+            <input
+                type="text"
+                name="name"
+                placeholder="Full name"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email address"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Password (at least 8 characters)"
+                minlength="8"
+                required
+            >
+
+            <input
+                type="password"
+                name="confirm_password"
+                placeholder="Confirm password"
+                minlength="8"
+                required
+            >
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p class="link">
+            Already have an account?
+            <a href="/login">Login</a>
+        </p>
+    </div>
+</body>
+</html>

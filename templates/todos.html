@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f4f8;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .add-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            min-width: 0;
+            padding: 11px;
+        }
+
+        button {
+            padding: 10px 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #ddd;
+            padding: 12px 0;
+        }
+
+        .task-title {
+            overflow-wrap: anywhere;
+        }
+
+        .done {
+            text-decoration: line-through;
+            color: #777;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .delete {
+            background: #dc2626;
+        }
+
+        a {
+            color: #2563eb;
+        }
+
+        @media (max-width: 480px) {
+            .task {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .add-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My To-Do List</h1>
+
+        <p>Welcome, {{ name }}!</p>
+
+        <form class="add-form" method="POST" action="/todos/add">
+            <input
+                type="text"
+                name="title"
+                placeholder="What do you need to do?"
+                maxlength="200"
+                required
+            >
+            <button type="submit">Add</button>
+        </form>
+
+        {% if todos %}
+            {% for todo in todos %}
+            <div class="task">
+                <span class="task-title {{ 'done' if todo.is_done else '' }}">
+                    {{ todo.title }}
+                </span>
+
+                <div class="actions">
+                    <form method="GET" action="/todos/edit/{{ todo.todo_id }}">
+                        <button type="submit">Edit</button>
+                    </form>
+
+                    <form method="POST" action="/todos/toggle/{{ todo.todo_id }}">
+                        <button type="submit">
+                            {{ 'Undo' if todo.is_done else 'Done' }}
+                        </button>
+                    </form>
+
+                    <form
+                        method="POST"
+                        action="/todos/delete/{{ todo.todo_id }}"
+                        onsubmit="return confirm('Are you sure you want to delete this task?');"
+                    >
+                        <button class="delete" type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>You don't have any tasks yet. Add one above!</p>
+        {% endif %}
+
+        <p><a href="/logout">Log out</a></p>
+    </div>
+</body>
+</html>
