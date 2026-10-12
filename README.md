@@ -75,12 +75,12 @@ Open this address in your browser:
 
 [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
-## 6. Team Members and Contributions
+## 6. Team Members
 
-Replace the information below with the actual names, student IDs, and contributions of your group members.
+- **Member 1:** Amir Ehab Madih — 2304022
+- **Member 2:** Hussin Mohamed Elnakib — 2304272
 
-- **Member 1:** [Amir Ehab Madih] — [2304022]&#x20;
-- **Member 2: [Hussin Mohamed Elnakib**] — [2304272]&#x20;
+Both team members worked together on the project, including application development, database setup, testing, and documentation.
 
 ## 7. Assignment Questions
 
@@ -99,3 +99,12 @@ A password hash protects the original password from being stored directly in the
 ### D. If the name column is NOT NULL, why check whether the name is empty?
 
 NOT NULL prevents a value of NULL, but it does not prevent an empty string or a string containing only spaces. The application checks the name to make sure the user enters an actual name.
+
+## 8. Screenshots
+
+The `screenshots` folder contains screenshots of the application:
+
+- `register.png` — Registration page and validation
+- `Login.png` — Login page
+- `Todos.png` — To-do list showing a completed task
+- `mobile.png` — Responsive mobile layout
